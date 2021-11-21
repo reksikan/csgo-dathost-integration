@@ -37,9 +37,9 @@ async def startgame(
                 "enable_ready": "true",
                 "game_server_id": copied_server['id'],
                 "map": selected_map,
-                "match_end_webhook_url": f'{SERVER_HOST}:{SERVER_PORT}/endgame/',
+                "match_end_webhook_url": f'{SERVER_HOST}:{str(SERVER_PORT)}/endgame/',
                 "message_prefix": "CSBANGER",
-                "playwin_result_webhook_url": f'{SERVER_HOST}:{SERVER_PORT}/endgame/',
+                "playwin_result_webhook_url": f'{SERVER_HOST}:{str(SERVER_PORT)}/endgame/',
                 "round_end_webhook_url": "https://webhook.site/158356bd-dcc4-46d6-9903-4d5b85e0935c",
                 "team1_name": team1,
                 "team1_steam_ids": players1,
@@ -50,13 +50,13 @@ async def startgame(
         ).json()
         print(match)
         requests.post(
-            f'https://dathost.net/api/0.1/game-servers/{SOURCE_SERVER_ID}/console',
+            f'https://dathost.net/api/0.1/game-servers/{copied_server["id"]}/console',
             data={'line': f'mp_maxrounds {max_rounds}'},
             auth=(API_LOGIN, API_PASSWORD)
         )
 
         response_data = {
-            'ip': copied_server['ip'] + ':' + copied_server['ports']['game'],
+            'ip': copied_server['ip'] + ':' + str(copied_server['ports']['game']),
             'start_time': datetime.datetime.now(),
             'match': match
         }
