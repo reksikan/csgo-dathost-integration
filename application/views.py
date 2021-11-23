@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from typing import Optional
 import requests
 
-from config import SOURCE_SERVER_ID, API_LOGIN, API_PASSWORD, SERVER_HOST, SERVER_PORT
+from config import SOURCE_SERVER_ID, API_LOGIN, API_PASSWORD, SERVER_HOST, SERVER_PORT, STEAM_TOKEN
 
 app = FastAPI()
 
@@ -25,7 +25,11 @@ async def startgame(
             f'https://dathost.net/api/0.1/game-servers/{SOURCE_SERVER_ID}/duplicate',
             auth=(API_LOGIN, API_PASSWORD)
         ).json()
-        print(copied_server)
+        requests.put(
+            f'https://dathost.net/api/0.1/game-servers/{copied_server["id"]}',
+            data={'csgo_settings.steam_game_server_login_token': STEAM_TOKEN},
+            auth=(API_LOGIN, API_PASSWORD)
+        ).json()
 
         # Create match
         match = requests.post(
@@ -48,7 +52,8 @@ async def startgame(
             },
             auth=(API_LOGIN, API_PASSWORD)
         ).json()
-        print(match)
+        
+        # Settings of match
         requests.post(
             f'https://dathost.net/api/0.1/game-servers/{copied_server["id"]}/console',
             data={'line': f'mp_maxrounds {max_rounds}'},
