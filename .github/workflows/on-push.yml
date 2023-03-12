@@ -31,6 +31,7 @@ jobs:
           -e PYTEST=true
           -e POSTGRES_HOST=postgres
           -e POSTGRES_TEST_DATABASE=postgres
+          -e POSTGRES_PASSWORD=postgres
           --network ${{ job.container.network }}
           csgo-dathost-integration:0.0
           python -m pytest --disable-warnings
