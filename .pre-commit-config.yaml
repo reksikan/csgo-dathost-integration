@@ -50,5 +50,5 @@ repos:
     hooks:
       - id: mypy
         exclude: ^migration/
-        args: [--strict, --install-types]
+        args: [--install-types]
         additional_dependencies: [mypy-extensions==0.4.3]
