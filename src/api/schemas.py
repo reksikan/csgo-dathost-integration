@@ -1,4 +1,4 @@
-from typing import Optional, Any, List
+from typing import Optional, Any, List, Dict
 
 from pydantic import BaseModel, Field
 
@@ -66,16 +66,16 @@ class MatchDathostSchema(BaseModel):
     cancel_reason: Optional[str]
     rounds_played: int
 
-    team1_stats: dict[str, int]
-    team2_stats: dict[str, int]
-    player_stats: dict[str, Any]
+    team1_stats: Dict[str, int]
+    team2_stats: Dict[str, int]
+    player_stats: Dict[str, Any]
 
     enable_knife_round: bool
     enable_pause: bool
     enable_playwin: bool
 
     playwin_result_webhook_url: Optional[str]
-    playwin_result: dict[str, Any]
+    playwin_result: Dict[str, Any]
 
     enable_pause: bool
     ready_min_players: int
