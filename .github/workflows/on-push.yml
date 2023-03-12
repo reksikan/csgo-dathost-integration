@@ -1,4 +1,4 @@
-qname: Tests and linters
+name: Tests and linters
 
 on:
   push:
