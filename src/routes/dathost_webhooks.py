@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Header, Response
 
-from src.clients.dathost_client import DathostClient
-from config import WEBHOOK_ROUTS_PREFIX, ROUND_END_WEBHOOK_ROUTING_KEY, MATCH_END_WEBHOOK_ROUTING_KEY
-from src.db.db_manager import DbManager
+from config import (MATCH_END_WEBHOOK_ROUTING_KEY,
+                    ROUND_END_WEBHOOK_ROUTING_KEY, WEBHOOK_ROUTS_PREFIX)
 from src.api.schemas import MatchDathostSchema
+from src.clients.dathost_client import DathostClient
+from src.db.db_manager import DbManager
+
 
 class DathostWebhookRouter:
 
@@ -20,7 +22,6 @@ class DathostWebhookRouter:
         router.add_api_route(ROUND_END_WEBHOOK_ROUTING_KEY, self._round_ended)
         self._router = router
 
-
     async def _match_ended(
         self,
         updated_match: MatchDathostSchema,
@@ -32,7 +33,6 @@ class DathostWebhookRouter:
             return Response()
         else:
             Response(status_code=401)
-
 
     async def _round_ended(
         self,

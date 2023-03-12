@@ -6,16 +6,9 @@ from src.api.schemas import CreatedServerSchema, CreateMatchSchema
 from src.db.db_manager import DbManager
 from src.db.models import Match
 from tests.helpers import create_matches_in_db
-from tests.testdata import (
-    DATHOST_GAME_SERVER_HOST,
-    CSGO_MAP,
-    PLAYER1,
-    PLAYER2,
-    PLAYER3,
-    PLAYER4,
-    TEAM1_NAME,
-    TEAM2_NAME, NEW_DATHOST_SERVER, NEW_MATCH_SETTINGS
-)
+from tests.testdata import (CSGO_MAP, DATHOST_GAME_SERVER_HOST,
+                            NEW_DATHOST_SERVER, NEW_MATCH_SETTINGS, PLAYER1,
+                            PLAYER2, PLAYER3, PLAYER4, TEAM1_NAME, TEAM2_NAME)
 
 
 async def test_get_match(isolate_db_manager: DbManager):
@@ -33,8 +26,6 @@ async def test_get_match(isolate_db_manager: DbManager):
     assert match1.max_rounds == 15
 
     assert match1.server_host == DATHOST_GAME_SERVER_HOST
-
-
 
 
 @pytest.mark.parametrize(
@@ -71,7 +62,6 @@ async def test_create_match(
 
     assert match.server_id == new_server.id_
     assert match.server_host == new_server.host
-
 
 
 async def test_end_match(isolate_db_manager: DbManager):

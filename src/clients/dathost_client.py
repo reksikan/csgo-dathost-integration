@@ -1,17 +1,15 @@
 import uuid
 from typing import Any, Optional
 
-from aiologger.loggers.json import JsonLogger
 from aiohttp import BasicAuth
 from aiohttp.client import ClientSession
+from aiologger.loggers.json import JsonLogger
 
+from config import (DATHOST_LOGIN, DATHOST_PASSWORD, DATHOST_URL,
+                    SOURCE_SERVER_ID, STEAM_TOKEN)
+from src.api.schemas import (CreatedServerSchema, CreateMatchSchema,
+                             MatchDathostSchema)
 from src.common.helpers import startgame_settings
-from config import (
-    DATHOST_LOGIN,
-    DATHOST_URL,
-    DATHOST_PASSWORD, SOURCE_SERVER_ID, STEAM_TOKEN,
-)
-from src.api.schemas import CreatedServerSchema, MatchDathostSchema, CreateMatchSchema
 
 logger = JsonLogger.with_default_handlers()
 

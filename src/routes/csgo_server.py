@@ -1,12 +1,13 @@
 import uuid
 
-from fastapi import APIRouter, Response
 from aiologger.loggers.json import JsonLogger
+from fastapi import APIRouter, Response
 
-from config import MATCH_ROUTS_PREFIX, MATCH_ROUTING_KEY
-from src.db.db_manager import DbManager
+from config import MATCH_ROUTING_KEY, MATCH_ROUTS_PREFIX
+from src.api.schemas import (CreateMatchResponseSchema, CreateMatchSchema,
+                             MatchDataSchema)
 from src.clients.dathost_client import DathostClient
-from src.api.schemas import CreateMatchSchema, CreateMatchResponseSchema, MatchDataSchema
+from src.db.db_manager import DbManager
 
 logger = JsonLogger.with_default_handlers()
 
@@ -27,7 +28,6 @@ class CsgoServerRouter:
         router.add_api_route(MATCH_ROUTING_KEY, self._match_data, methods=['GET'], response_model=MatchDataSchema)
         self._router = router
 
-
     async def _start_match(self, match_settings: CreateMatchSchema) -> Response:
         try:
             new_server = await self._dathost_client.create_new_server_from_copy()
@@ -37,7 +37,7 @@ class CsgoServerRouter:
 
             return Response(CreateMatchResponseSchema(match=MatchDataSchema(**dict(match))))
         except Exception:
-            await logger.exception(f'Got exception on server create')
+            await logger.exception('Got exception on server create')
             return Response(
                 content=CreateMatchResponseSchema(
                     status='error',
@@ -45,7 +45,6 @@ class CsgoServerRouter:
                 ),
                 status_code=500,
             )
-
 
     async def _match_data(self, match_id: str) -> Response:
         if match := await self._db_manager.get_match(match_id):

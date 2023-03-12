@@ -1,9 +1,11 @@
 import uuid
 from typing import List
 
+from testdata import (CSGO_MAP, DATHOST_GAME_SERVER_HOST, PLAYER1, PLAYER2,
+                      PLAYER3, PLAYER4, TEAM1_NAME, TEAM2_NAME)
+
 from src.db.db_manager import DbManager
 from src.db.models import Match
-from testdata import DATHOST_GAME_SERVER_HOST, CSGO_MAP, TEAM1_NAME, PLAYER3, PLAYER4, PLAYER1, TEAM2_NAME, PLAYER2
 
 
 async def create_matches_in_db(db_manager: DbManager) -> List[str]:

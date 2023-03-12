@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Response, Request
+from fastapi import FastAPI, Request, Response
 
 from src.clients.dathost_client import DathostClient
 from src.db.db_manager import DbManager
 from src.routes.csgo_server import CsgoServerRouter
 from src.routes.dathost_webhooks import DathostWebhookRouter
+
 
 class HTTPServer:
 

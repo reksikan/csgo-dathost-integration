@@ -1,6 +1,6 @@
 import uuid
 
-from src.api.schemas import CreateMatchSchema, CreatedServerSchema
+from src.api.schemas import CreatedServerSchema, CreateMatchSchema
 
 DATHOST_GAME_SERVER_HOST = '222.222.222.222:2222'
 CSGO_MAP = 'de_dust2'

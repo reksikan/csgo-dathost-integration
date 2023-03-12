@@ -1,15 +1,12 @@
 import asyncio
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
 from alembic import context
+from sqlalchemy import engine_from_config, pool
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from config import POSTGRES_URL
 from src.db.models import Base
-
 
 config = context.config
 

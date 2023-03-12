@@ -1,13 +1,15 @@
 import subprocess
 import uuid
 
-from sqlalchemy import text, select, update
 from aiologger.loggers.json import JsonLogger
-from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy import select, text, update
+from sqlalchemy.ext.asyncio import (AsyncEngine, AsyncSession,
+                                    async_sessionmaker, create_async_engine)
 from sqlalchemy.ext.asyncio.session import _AsyncSessionContextManager
 
+from src.api.schemas import CreatedServerSchema, CreateMatchSchema
+
 from .models import Match
-from src.api.schemas import CreateMatchSchema, CreatedServerSchema
 
 logger = JsonLogger.with_default_handlers()
 
