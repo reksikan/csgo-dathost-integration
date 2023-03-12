@@ -1,4 +1,4 @@
-from typing import Optional, Any
+from typing import Optional, Any, List
 
 from pydantic import BaseModel, Field
 
@@ -6,9 +6,9 @@ from pydantic import BaseModel, Field
 class CreateMatchSchema(BaseModel):
     max_rounds: int
     map: str
-    team1_roster: list[str]
+    team1_roster: List[str]
     team1_name: str
-    team2_roster: list[str]
+    team2_roster: List[str]
     team2_name: str
 
 
@@ -23,10 +23,10 @@ class MatchDataSchema(BaseModel):
     server_host: str
     max_rounds: str
     map: str
-    team1_roster: list[str]
+    team1_roster: List[str]
     team1_name: str
     team1_score: int
-    team2_roster: str
+    team2_roster: List[str]
     team2_name: str
     team2_score: int
 
@@ -45,18 +45,18 @@ class MatchDathostSchema(BaseModel):
     warmup_time: int
 
     team1_start_ct: bool
-    team1_steam_ids: Optional[list[str]] = Field(alias='team1_roster')
-    team1_coach_steam_id: Optional[list[str]] = Field(alias='team1_coaches')
+    team1_steam_ids: Optional[List[str]] = Field(alias='team1_roster')
+    team1_coach_steam_id: Optional[List[str]] = Field(alias='team1_coaches')
     team1_name: str
     team1_flag: str
 
     team2_start_ct: bool
-    team2_steam_ids: Optional[list[str]] = Field(alias='team1_roster')
-    team2_coach_steam_id: Optional[list[str]] = Field(alias='team1_coaches')
+    team2_steam_ids: Optional[List[str]] = Field(alias='team1_roster')
+    team2_coach_steam_id: Optional[List[str]] = Field(alias='team1_coaches')
     team2_name: str
     team2_flag: str
 
-    spectator_steam_ids: list[str]
+    spectator_steam_ids: List[str]
     wait_for_coaches: bool
     wait_for_spectators: bool
     round_end_webhook_url: str

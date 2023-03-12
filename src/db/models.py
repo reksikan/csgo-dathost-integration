@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
 from enum import Enum
+from typing import List
 
 from sqlalchemy import Column, DateTime, SmallInteger, ARRAY, UUID, Text
 from sqlalchemy.orm import declarative_base
@@ -26,9 +27,9 @@ class Match(Base):
 
     team1_name: str = Column(Text, nullable=False)
     team1_score: int = Column(SmallInteger, default=0)
-    team1_roster: str = Column(ARRAY(Text), nullable=False)
+    team1_roster: List[str] = Column(ARRAY(Text), nullable=False)
 
     team2_name: str = Column(Text, nullable=False)
     team2_score: int = Column(SmallInteger, default=0)
-    team2_roster: str = Column(ARRAY(Text), nullable=False)
+    team2_roster: List[str] = Column(ARRAY(Text), nullable=False)
 

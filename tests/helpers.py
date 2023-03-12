@@ -1,11 +1,12 @@
 import uuid
+from typing import List
 
 from src.db.db_manager import DbManager
 from src.db.models import Match
 from testdata import DATHOST_GAME_SERVER_HOST, CSGO_MAP, TEAM1_NAME, PLAYER3, PLAYER4, PLAYER1, TEAM2_NAME, PLAYER2
 
 
-async def create_matches_in_db(db_manager: DbManager) -> list[str]:
+async def create_matches_in_db(db_manager: DbManager) -> List[str]:
     match1_id = str(uuid.uuid4())
     match1 = Match(
         id=match1_id,
