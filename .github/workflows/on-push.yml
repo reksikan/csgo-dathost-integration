@@ -29,7 +29,6 @@ jobs:
         run: docker run
           -e PYTHONPATH=.
           -e PYTEST=true
-          -e POSTGRES_HOST=postgres
           -e POSTGRES_TEST_DATABASE=postgres
           -e POSTGRES_PASSWORD=postgres
           --network ${{ job.container.network }}

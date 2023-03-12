@@ -96,10 +96,12 @@ def create_db_manager(
     need_migrations: bool = True
 ) -> DbManager:
     engine = create_async_engine(connection_url)
+
     if need_migrations:
         subprocess.run(
             'alembic upgrade head',
             check=True,
             shell=True
         )
+
     return DbManager(engine)
