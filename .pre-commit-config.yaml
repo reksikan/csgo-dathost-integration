@@ -49,6 +49,6 @@ repos:
     rev: v0.902
     hooks:
       - id: mypy
-        exclude: ^migration/, ^tests/
+        files: 'src/.*'
         args: [--strict, --install-types]
         additional_dependencies: [mypy-extensions==0.4.3]
