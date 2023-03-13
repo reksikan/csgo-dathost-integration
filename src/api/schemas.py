@@ -18,7 +18,7 @@ class CreatedServerSchema(BaseModel):
 
 
 class MatchDataSchema(BaseModel):
-    match_id: str
+    id: str
     server_id: str
     server_host: str
     max_rounds: str

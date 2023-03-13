@@ -1,5 +1,5 @@
 import uuid
-from typing import Any, Optional
+from typing import Any, Optional, Dict
 
 from aiohttp import BasicAuth
 from aiohttp.client import ClientSession
@@ -25,7 +25,7 @@ class DathostClient:
         path: str,
         params: Optional[dict[str, Any]] = None,
         data: Optional[dict[str, Any]] = None,
-    ) -> dict:
+    ) -> Dict[str, Any]:
         async with ClientSession as client:
             await logger.info(f'Making http request to dathost with {path=} {method=} {params=} {data=}')
             async with client.request(

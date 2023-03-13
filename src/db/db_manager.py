@@ -48,7 +48,7 @@ class DbManager:
                 secret_key=secret_key,
                 server_id=server.id_,
                 server_host=server.host,
-                selected_map=create_match.map,
+                map=create_match.map,
                 max_rounds=create_match.max_rounds,
                 team1_name=create_match.team1_name,
                 team1_roster=create_match.team1_roster,

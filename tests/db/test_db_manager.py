@@ -6,9 +6,20 @@ from src.api.schemas import CreatedServerSchema, CreateMatchSchema
 from src.db.db_manager import DbManager
 from src.db.models import Match
 from tests.helpers import create_matches_in_db
-from tests.testdata import (CSGO_MAP, DATHOST_GAME_SERVER_HOST,
-                            NEW_DATHOST_SERVER, NEW_MATCH_SETTINGS, PLAYER1,
-                            PLAYER2, PLAYER3, PLAYER4, TEAM1_NAME, TEAM2_NAME)
+from tests.testdata import (
+    CSGO_MAP,
+    DATHOST_GAME_SERVER_HOST,
+    NEW_DATHOST_SERVER,
+    NEW_MATCH_SETTINGS,
+    PLAYER1,
+    PLAYER2,
+    PLAYER3,
+    PLAYER4,
+    TEAM1_NAME,
+    TEAM2_NAME,
+    MATCH1_ID,
+    MATCH1_SECRET
+)
 
 
 async def test_get_match(isolate_db_manager: DbManager):
@@ -22,7 +33,7 @@ async def test_get_match(isolate_db_manager: DbManager):
     assert match1.team2_name == TEAM2_NAME
     assert match1.team2_roster == [PLAYER3, PLAYER4]
 
-    assert match1.selected_map == CSGO_MAP
+    assert match1.map == CSGO_MAP
     assert match1.max_rounds == 15
 
     assert match1.server_host == DATHOST_GAME_SERVER_HOST
@@ -34,8 +45,8 @@ async def test_get_match(isolate_db_manager: DbManager):
         (
             NEW_DATHOST_SERVER,
             NEW_MATCH_SETTINGS,
-            uuid.uuid4(),
-            str(uuid.uuid4()),
+            MATCH1_SECRET,
+            MATCH1_ID,
         ),
     )
 )
@@ -57,7 +68,7 @@ async def test_create_match(
     assert match.team2_name == new_match.team2_name
     assert match.team2_roster == new_match.team2_roster
 
-    assert match.selected_map == new_match.map
+    assert match.map == new_match.map
     assert match.max_rounds == new_match.max_rounds
 
     assert match.server_id == new_server.id_

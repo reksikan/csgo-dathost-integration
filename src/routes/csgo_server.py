@@ -1,4 +1,5 @@
 import uuid
+from typing import Optional
 
 from aiologger.loggers.json import JsonLogger
 from fastapi import APIRouter, Response
@@ -19,38 +20,32 @@ class CsgoServerRouter:
         self._db_manager = db_manager
 
         router = APIRouter(prefix=MATCH_ROUTS_PREFIX)
-        router.add_api_route(
-            MATCH_ROUTING_KEY,
-            self._start_match,
-            methods=['POST'],
-            response_model=CreateMatchResponseSchema
-        )
-        router.add_api_route(MATCH_ROUTING_KEY, self._match_data, methods=['GET'], response_model=MatchDataSchema)
+        router.add_api_route(MATCH_ROUTING_KEY, self._start_match, methods=['POST'])
+        router.add_api_route(MATCH_ROUTING_KEY, self._match_data, methods=['GET'])
         self._router = router
 
-    async def _start_match(self, match_settings: CreateMatchSchema) -> Response:
+    async def _start_match(self, match_settings: CreateMatchSchema, response: Response) -> CreateMatchResponseSchema:
         try:
             new_server = await self._dathost_client.create_new_server_from_copy()
             secret_key = uuid.uuid4()
             new_match = await self._dathost_client.create_and_setup_match(new_server, match_settings, secret_key)
             match = await self._db_manager.create_match(new_server, match_settings, secret_key, new_match.id_)
 
-            return Response(CreateMatchResponseSchema(match=MatchDataSchema(**dict(match))))
+            return CreateMatchResponseSchema(match=MatchDataSchema(**dict(match)))
         except Exception:
             await logger.exception('Got exception on server create')
-            return Response(
-                content=CreateMatchResponseSchema(
-                    status='error',
-                    error='Error on creating match',
-                ),
-                status_code=500,
+            response.status_code = 500
+            return CreateMatchResponseSchema(
+                status='error',
+                error='Error on creating match',
             )
 
-    async def _match_data(self, match_id: str) -> Response:
+    async def _match_data(self, match_id: str, response: Response) -> Optional[MatchDataSchema]:
         if match := await self._db_manager.get_match(match_id):
-            return Response(MatchDataSchema(**dict(match)))
+            return MatchDataSchema(**match.__dict__)
         else:
-            return Response(status_code=404)
+            response.status_code = 404
+            return None
 
     @property
     def router(self):

@@ -20,8 +20,8 @@ STEAM_TOKEN = getenv('STEAM_TOKEN')
 SOURCE_SERVER_ID = '6198112a4b5e144c0d52d0b5'
 
 # Dathost settings
-DATHOST_LOGIN = getenv('API_LOGIN')
-DATHOST_PASSWORD = getenv('API_PASSWORD')
+DATHOST_LOGIN = getenv('API_LOGIN', 'Login')
+DATHOST_PASSWORD = getenv('API_PASSWORD', 'Password')
 DATHOST_URL = 'https://dathost.net/api/0.1'
 
 # Database settings

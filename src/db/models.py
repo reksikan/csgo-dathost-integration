@@ -21,7 +21,7 @@ class Match(Base):
     server_host: str = Column(Text, nullable=False)
     status: Status = Column(Text, default=Status.in_process)
     created_at: datetime = Column(DateTime, default=datetime.utcnow())
-    selected_map: str = Column(Text, nullable=False)
+    map: str = Column(Text, nullable=False)
     max_rounds: str = Column(SmallInteger, nullable=False)
 
     team1_name: str = Column(Text, nullable=False)

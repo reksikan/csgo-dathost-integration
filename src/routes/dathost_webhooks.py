@@ -25,20 +25,22 @@ class DathostWebhookRouter:
     async def _match_ended(
         self,
         updated_match: MatchDathostSchema,
+        response: Response,
         authorization: str = Header(default=''),
-    ) -> Response:
+    ):
         match = await self._db_manager.get_match(updated_match.id_)
         if match and match.secret_key == authorization:
             await self._db_manager.end_match(match.id)
-            return Response()
         else:
-            Response(status_code=401)
+            response.status_code = 401
+        return
 
     async def _round_ended(
         self,
         updated_match: MatchDathostSchema,
+        response: Response,
         authorization: str = Header(default=''),
-    ) -> Response:
+    ):
         match = await self._db_manager.get_match(updated_match.id_)
         if match and match.secret_key == authorization:
             await self._db_manager.update_score(
@@ -46,9 +48,9 @@ class DathostWebhookRouter:
                 team1_score=updated_match.team1_stats['score'],
                 team2_score=updated_match.team2_stats['score'],
             )
-            return Response()
         else:
-            Response(status_code=401)
+            response.status_code = 401
+        return
 
     @property
     def router(self):
