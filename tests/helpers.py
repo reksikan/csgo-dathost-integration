@@ -1,21 +1,9 @@
-import uuid
 from typing import List
 
-from testdata import (
-    MATCH1_ID,
-    MATCH2_ID,
-    MATCH1_SECRET,
-    MATCH2_SECRET,
-    SERVER_ID,
-    CSGO_MAP,
-    DATHOST_GAME_SERVER_HOST,
-    PLAYER1,
-    PLAYER2,
-    PLAYER3,
-    PLAYER4,
-    TEAM1_NAME,
-    TEAM2_NAME, CSGO_MAX_ROUNDS
-)
+from testdata import (CSGO_MAP, CSGO_MAX_ROUNDS, DATHOST_GAME_SERVER_HOST,
+                      MATCH1_ID, MATCH1_SECRET, MATCH2_ID, MATCH2_SECRET,
+                      PLAYER1, PLAYER2, PLAYER3, PLAYER4, SERVER_ID,
+                      TEAM1_NAME, TEAM2_NAME)
 
 from src.db.db_manager import DbManager
 from src.db.models import Match

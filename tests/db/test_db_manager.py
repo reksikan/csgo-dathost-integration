@@ -6,20 +6,10 @@ from src.api.schemas import CreatedServerSchema, CreateMatchSchema
 from src.db.db_manager import DbManager
 from src.db.models import Match
 from tests.helpers import create_matches_in_db
-from tests.testdata import (
-    CSGO_MAP,
-    DATHOST_GAME_SERVER_HOST,
-    NEW_DATHOST_SERVER,
-    NEW_MATCH_SETTINGS,
-    PLAYER1,
-    PLAYER2,
-    PLAYER3,
-    PLAYER4,
-    TEAM1_NAME,
-    TEAM2_NAME,
-    MATCH1_ID,
-    MATCH1_SECRET
-)
+from tests.testdata import (CSGO_MAP, DATHOST_GAME_SERVER_HOST, MATCH1_ID,
+                            MATCH1_SECRET, NEW_DATHOST_SERVER,
+                            NEW_MATCH_SETTINGS, PLAYER1, PLAYER2, PLAYER3,
+                            PLAYER4, TEAM1_NAME, TEAM2_NAME)
 
 
 async def test_get_match(isolate_db_manager: DbManager):

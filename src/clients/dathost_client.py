@@ -1,5 +1,5 @@
 import uuid
-from typing import Any, Optional, Dict
+from typing import Any, Dict, Optional
 
 from aiohttp import BasicAuth
 from aiohttp.client import ClientSession

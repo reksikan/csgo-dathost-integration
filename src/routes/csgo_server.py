@@ -2,7 +2,7 @@ import uuid
 from typing import Optional
 
 from aiologger.loggers.json import JsonLogger
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response, status
 
 from config import MATCH_ROUTING_KEY, MATCH_ROUTS_PREFIX
 from src.api.schemas import (CreateMatchResponseSchema, CreateMatchSchema,
@@ -34,17 +34,18 @@ class CsgoServerRouter:
             return CreateMatchResponseSchema(match=MatchDataSchema(**dict(match)))
         except Exception:
             await logger.exception('Got exception on server create')
-            response.status_code = 500
+            response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             return CreateMatchResponseSchema(
                 status='error',
                 error='Error on creating match',
             )
 
     async def _match_data(self, match_id: str, response: Response) -> Optional[MatchDataSchema]:
-        if match := await self._db_manager.get_match(match_id):
+        match = await self._db_manager.get_match(match_id)
+        if match:
             return MatchDataSchema(**match.__dict__)
         else:
-            response.status_code = 404
+            response.status_code = status.HTTP_404_NOT_FOUND
             return None
 
     @property

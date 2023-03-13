@@ -1,7 +1,8 @@
 import uuid
 
 from config import MATCH_END_WEBHOOK, ROUND_END_WEBHOOK
-from src.api.schemas import CreatedServerSchema, CreateMatchSchema, MatchDataSchema
+from src.api.schemas import (CreatedServerSchema, CreateMatchSchema,
+                             MatchDataSchema)
 
 SERVER_ID = 'dc1cfc0c-5bfe-4cb2-9fdc-98680935d940'
 
@@ -55,7 +56,7 @@ SERIALIZED_DATHOST_MATCH_SETTINGS = {
 }
 
 MATCH1_RESPONSE_DATA = MatchDataSchema(
-    id=MATCH2_ID,
+    id=MATCH1_ID,
     server_id=SERVER_ID,
     server_host=DATHOST_GAME_SERVER_HOST,
     max_rounds=CSGO_MAX_ROUNDS,

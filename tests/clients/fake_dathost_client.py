@@ -1,4 +1,4 @@
-from typing import Optional, Any, Dict, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 from src.clients.dathost_client import DathostClient
 
