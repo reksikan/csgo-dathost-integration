@@ -80,7 +80,7 @@ CREATE_MATCH_DATA = CreateMatchRequestSchema(
     team2_name=TEAM2_NAME,
 )
 
-MATCH_CREATED_DATHOST_RESPONSE = MatchDathostSchema(
+MATCH_DATHOST_DATA = MatchDathostSchema(
     id=MATCH1_ID,
     server_id=SERVER_ID,
     map=CSGO_MAP,
@@ -105,8 +105,8 @@ MATCH_CREATED_DATHOST_RESPONSE = MatchDathostSchema(
     finished=False,
     cancel_reason='',
     rounds_played=0,
-    team1_stats=[],
-    team2_stats=[],
+    team1_stats={'score': 1},
+    team2_stats={'score': 0},
     player_stats=[],
     enable_knife_round=True,
     enable_pause=True,

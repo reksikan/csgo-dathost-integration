@@ -3,8 +3,7 @@ from typing import Any, Dict, Optional
 import pytest
 from testdata import (CREATE_MATCH_DATA, DATHOST_GAME_SERVER_IP,
                       DATHOST_GAME_SERVER_PROT, MATCH1_ID,
-                      MATCH1_RESPONSE_DATA, MATCH_CREATED_DATHOST_RESPONSE,
-                      SERVER_ID)
+                      MATCH1_RESPONSE_DATA, MATCH_DATHOST_DATA, SERVER_ID)
 
 from config import MATCH_ROUTING_KEY, MATCH_ROUTS_PREFIX, SOURCE_SERVER_ID
 from src.common.schemas import (CreateMatchRequestSchema,
@@ -39,7 +38,7 @@ async def test_create_match(
         'ip': DATHOST_GAME_SERVER_IP,
         'ports': {'game': DATHOST_GAME_SERVER_PROT}
     }
-    fake_dathost_client.response_dict[('POST', '/matches')] = MATCH_CREATED_DATHOST_RESPONSE.dict()
+    fake_dathost_client.response_dict[('POST', '/matches')] = MATCH_DATHOST_DATA.dict()
 
     client = await get_test_http_self_client(isolate_db_manager, fake_dathost_client)
 
