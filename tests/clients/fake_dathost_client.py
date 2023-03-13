@@ -11,7 +11,7 @@ class FakeDathostClient(DathostClient):
         self,
         method: str,
         path: str,
-        params: Optional[dict[str, Any]] = None,
-        data: Optional[dict[str, Any]] = None,
+        params: Optional[Dict[str, Any]] = None,
+        data: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         return self.response_dict.get((method, path), {})
