@@ -36,8 +36,7 @@ class CsgoServerRouter:
             match = await self._db_manager.create_match(new_server, match_settings, secret_key, new_match.id)
 
             return CreateMatchResponseSchema(match=MatchDataSchema(**match.__dict__))
-        except Exception as ex:
-            raise ex
+        except Exception:
             await logger.exception('Got exception on server create')
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             return CreateMatchResponseSchema(
