@@ -1,12 +1,12 @@
 import uuid
 
 from config import MATCH_END_WEBHOOK, ROUND_END_WEBHOOK
-from src.api.schemas import CreatedServerSchema, CreateMatchSchema
+from src.common.schemas import CreatedServerSchema, CreateMatchRequestSchema
 
 
 def startgame_settings(
     server: CreatedServerSchema,
-    match: CreateMatchSchema,
+    match: CreateMatchRequestSchema,
     secret_key: uuid.UUID,
 ):
     return {
@@ -14,7 +14,7 @@ def startgame_settings(
         'enable_pause': 'true',
         'enable_playwin': 'false',
         'enable_ready': 'true',
-        'game_server_id': server.id_,
+        'game_server_id': server.id,
         'map': match.map,
         'match_end_webhook_url': MATCH_END_WEBHOOK,
         'message_prefix': 'CSBANGER',

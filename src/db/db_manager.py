@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import (AsyncEngine, AsyncSession,
                                     async_sessionmaker, create_async_engine)
 from sqlalchemy.ext.asyncio.session import _AsyncSessionContextManager
 
-from src.api.schemas import CreatedServerSchema, CreateMatchSchema
+from src.common.schemas import CreatedServerSchema, CreateMatchRequestSchema
 
 from .models import Match
 
@@ -38,7 +38,7 @@ class DbManager:
     async def create_match(
         self,
         server: CreatedServerSchema,
-        create_match: CreateMatchSchema,
+        create_match: CreateMatchRequestSchema,
         secret_key: uuid.UUID,
         match_id: str,
     ) -> Match:
@@ -46,7 +46,7 @@ class DbManager:
             match = Match(
                 id=match_id,
                 secret_key=secret_key,
-                server_id=server.id_,
+                server_id=server.id,
                 server_host=server.host,
                 map=create_match.map,
                 max_rounds=create_match.max_rounds,

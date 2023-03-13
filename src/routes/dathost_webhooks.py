@@ -2,8 +2,8 @@ from fastapi import APIRouter, Header, Response
 
 from config import (MATCH_END_WEBHOOK_ROUTING_KEY,
                     ROUND_END_WEBHOOK_ROUTING_KEY, WEBHOOK_ROUTS_PREFIX)
-from src.api.schemas import MatchDathostSchema
 from src.clients.dathost_client import DathostClient
+from src.common.schemas import MatchDathostSchema
 from src.db.db_manager import DbManager
 
 

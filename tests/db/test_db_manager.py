@@ -2,7 +2,7 @@ import uuid
 
 import pytest
 
-from src.api.schemas import CreatedServerSchema, CreateMatchSchema
+from src.common.schemas import CreatedServerSchema, CreateMatchRequestSchema
 from src.db.db_manager import DbManager
 from src.db.models import Match
 from tests.helpers import create_matches_in_db
@@ -43,7 +43,7 @@ async def test_get_match(isolate_db_manager: DbManager):
 async def test_create_match(
     isolate_db_manager: DbManager,
     new_server: CreatedServerSchema,
-    new_match: CreateMatchSchema,
+    new_match: CreateMatchRequestSchema,
     secret_key: uuid.UUID,
     match_id: str
 ):
@@ -61,7 +61,7 @@ async def test_create_match(
     assert match.map == new_match.map
     assert match.max_rounds == new_match.max_rounds
 
-    assert match.server_id == new_server.id_
+    assert match.server_id == new_server.id
     assert match.server_host == new_server.host
 
 
