@@ -10,13 +10,11 @@ Microservice based on FastApi framework for integration with Dathost hosting
 
 ### _Linters_
 `docker run
-      --network ${{ job.container.network }}
       csgo-dathost-integration:0.0
       pre-commit run --all-files`
 
 ### _Tests_
 `docker run
-      --network ${{ job.container.network }}
       csgo-dathost-integration:0.0
       python -m pytest --disable-warnings`
 
